@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- webapp/WEB-INF/web.xml -->
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://java.sun.com/xml/ns/javaee"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
+	version="3.0">
+	<display-name>To do List</display-name>
+	<welcome-file-list>
+		<welcome-file>/WEB-INF/views/index.jsp</welcome-file>
+	</welcome-file-list>
+	<servlet>
+
+		<servlet-name>loginServlet</servlet-name>
+		<servlet-class>com.toba.banking.LoginServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>loginServlet</servlet-name>
+		<url-pattern>/loginServlet</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>loginServlet</servlet-name>
+		<url-pattern>/login</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>newCustomerServlet</servlet-name>
+		<servlet-class>com.toba.banking.NewCustomerServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>newCustomerServlet</servlet-name>
+		<url-pattern>/newCustomerServlet</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>newCustomerServlet</servlet-name>
+		<url-pattern>/passwordReset</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>transaction</servlet-name>
+		<servlet-class>com.toba.banking.TransactionServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>transaction</servlet-name>
+		<url-pattern>/transaction</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>transaction</servlet-name>
+		<url-pattern>/account</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>resetPassword</servlet-name>
+		<jsp-file>/WEB-INF/views/password_reset.jsp</jsp-file>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>resetPassword</servlet-name>
+		<url-pattern>/resetPassword</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>newCustomer</servlet-name>
+		<jsp-file>/WEB-INF/views/new_customer.jsp</jsp-file>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>newCustomer</servlet-name>
+		<url-pattern>/newCustomer</url-pattern>
+	</servlet-mapping>
+
+	<session-config>
+        <session-timeout>
+            30
+        </session-timeout>
+    </session-config>
+    
+	<error-page>
+		<error-code>404</error-code>
+		<location>/WEB-INF/views/error_404.jsp</location>
+	</error-page>
+	<error-page>
+		<exception-type>java.lang.Exception</exception-type>
+		<location>/WEB-INF/views/error_java.jsp</location>
+	</error-page>
+
+	<resource-ref>
+		<description>DB Connection</description>
+		<res-ref-name>jdbc/UsersDB</res-ref-name>
+		<res-type>javax.sql.DataSource</res-type>
+		<res-auth>Container</res-auth>
+	</resource-ref>
+	
+	<security-role>
+		<description>admin</description>
+		<role-name>admin</role-name>
+	</security-role>
+	<security-constraint>
+		<web-resource-collection>
+			<web-resource-name>Admin</web-resource-name>
+			<url-pattern>/admin/*</url-pattern>
+			<http-method>GET</http-method>
+			<http-method>POST</http-method>
+		</web-resource-collection>
+		<auth-constraint>
+			<role-name>admin</role-name>
+		</auth-constraint>
+	</security-constraint>
+	
+	<login-config>
+		<auth-method>FORM</auth-method>
+		<form-login-config>
+			<form-login-page>/WEB-INF/views/admin/login.html</form-login-page>
+			<form-error-page>/WEB-INF/views/admin/login_error.html</form-error-page>
+		</form-login-config>
+	</login-config>
+</web-app>
