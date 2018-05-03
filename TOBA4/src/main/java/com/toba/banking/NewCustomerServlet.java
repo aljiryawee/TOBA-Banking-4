@@ -8,15 +8,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-/**
- * Servlet implementation class NewCustomerServlet
- */
+
 public class NewCustomerServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	/**
-	 * @see HttpServlet#HttpServlet()
-	 */
+	
 	public NewCustomerServlet() {
 		super();
 	}
@@ -36,10 +32,7 @@ public class NewCustomerServlet extends HttpServlet {
 		response.sendRedirect("/WEB-INF/views/account_activity.html");
 	}
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
-	 *      response)
-	 */
+	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
@@ -79,19 +72,5 @@ public class NewCustomerServlet extends HttpServlet {
 		}
 	}
 
-	/*@Override
-	protected void doPut(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-
-		HttpSession httpSession = request.getSession();
-
-		User user = (User) httpSession.getAttribute("user");
-
-		user.setPassword(request.getParameter("password"));
-
-		httpSession.setAttribute("user", user);
-
-		response.sendRedirect("/WEB-INF/views/account_activity.html");
-	}*/
 
 }
